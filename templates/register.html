@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .col-sm-8 {
+            background-color: #5e5959af;
+            color: #fff;
+            padding: 20px;
+            border-radius: 50px;
+            width: 440px;
+            height: 750px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+    <title>Register page</title>
+</head>
+<body>
+<div class="container mt-3">
+    <div class="row justify-content-center" style="margin-top: 100px;">
+        <div class="col-sm-8" style="margin-top:20px; border-radius: 8%; padding-top: 3%; padding-bottom: 2%;padding-left: 2%;padding-right: 2%;">
+            <form action="{{ url_for('register') }}" method="POST">
+                <div class="mb-3 mt-3">
+                    <label for="name" class="form-label">Full name:</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" required>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="birthday" class="form-label">Birthday:</label>
+                    <input type="date" class="form-control" id="birthday" placeholder="mm/dd/year" name="birthday" required>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="Address" class="form-label">Address:</label>
+                    <textarea class="form-control" rows="6" id="Address" name="Address"></textarea>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="phone" class="form-label">Mobile number:</label>
+                    <input type="number" class="form-control" id="phone" name="phone" required>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="course" class="form-label">Course:</label>
+                    <input type="text" class="form-control" id="course" placeholder="Enter Course" name="course" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+{% endblock %}
