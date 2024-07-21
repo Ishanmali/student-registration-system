@@ -46,18 +46,27 @@ def about():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
+    if 'email' in session:
+        return redirect(url_for('home'))
+
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
         user = Signup.query.filter_by(email=email).first()
         if user and user.check_password(password):
             session['email'] = user.email
-            session['password'] = user.password
+            flash('Logged in successfully!', category='success')
             return redirect(url_for('home'))
         else:
             return render_template('login.html', error='Invalid user')
 
     return render_template('login.html')
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    flash('You have been logged out', category='success')
+    return redirect(url_for('home'))
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
@@ -95,18 +104,19 @@ def register():
 
         existing_register =  Register.query.filter_by(email=email).first()
         if existing_register:
-            flash('You already Registed', category='error')
-        elif len(phone)< 10:
+            flash('You already Registered', category='error')
+        elif len(phone) < 10:
              flash('Mobile number too short', category='error')
         else:    
             new_register = Register(name=name, birthday=birthday, Address=Address, phone=phone, email=email, course=course)
             db.session.add(new_register)
             db.session.commit()
-            flash('you successfully registed!', category='success')
+            flash('You successfully registered!', category='success')
             return redirect(url_for('home'))
 
     return render_template('register.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
